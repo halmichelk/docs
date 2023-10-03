@@ -12,6 +12,19 @@ a8"    `Y88  `8b     d8'  88P'   `"8a  ""     `Y8  88P'   "88"    "8a  a8"     "
                  d8'                                                                                          
                 d8' 
 
+Presentaciones de modelado de datos y patrones de diseño
+https://docs.aws.amazon.com/es_es/amazondynamodb/latest/developerguide/AdditionalResources.DataModeling.html
+
+Escritura de un elemento NODEJS
+https://docs.aws.amazon.com/es_es/amazondynamodb/latest/developerguide/GettingStarted.WriteItem.html
+
+
+herramientas dynamodb :
+											Puede utilizar las siguientes herramientas de codificación y visualización para trabajar con DynamoDB:
+											NoSQL Workbench para Amazon DynamoDB: una herramienta visual unificada que le ayuda a diseñar, crear, consultar y administrar tablas de DynamoDB. Proporciona características de modelado de datos, visualización de datos y desarrollo de consultas.
+											Dynobase: una herramienta de escritorio que facilita la visualización de las tablas de DynamoDB y el trabajo con ellas, la creación de código de aplicación y la edición de registros con validación en tiempo real.
+											Caja de herramientas DynamoDB: un proyecto de Jeremy Daly que proporciona utilidades eficaces para trabajar con el modelado de datos y JavaScript y Node.js.
+											Procesador de DynamoDB Streams: una herramienta sencilla que puede usar para trabajar con DynamoDB Streams.
 
 De forma predeterminada, cada partición de la tabla se esforzará por ofrecer la capacidad total de 3000 RCU y 1000 WCU.
 El rendimiento total de todas las particiones de la tabla puede estar limitado por el rendimiento aprovisionado en el modo aprovisionado, o por el límite de rendimiento a nivel de tabla en el modo bajo demanda. Para obtener más información, consulte Service Quotas.
@@ -63,6 +76,9 @@ Cada tabla de DynamoDB puede tener hasta 20 índices secundarios globales (cuota
 			un índice que tiene la misma clave de partición que la tabla base, pero una clave de clasificación diferente. 
 			LSI, el tamaño total de los elementos indexados de cualquier valor de clave de partición no podrá ser superior a 10 GB. Además
 
+
+
+Las claves de partición consecutivas no se juntan en Dynamodb, por el hash, que se hace 2 veces. El primero, se asegura de que dos claves seguidas no queden en la misma partición.
 
 No cree índices secundarios en atributos que no consulte con frecuencia. Los índices que se utilizan pocas veces provocan un aumento del almacenamiento y de los costos de E/S y no mejoran el rendimiento de la aplicación.
 si el tamaño de una entrada de índice es de tan solo 200 bytes, DynamoDB la redondeará a 1 KB.
@@ -133,6 +149,27 @@ a8P_____88  I8[    ""  a8"    `Y88  88       88  a8P_____88  88P'   "88"    "8a 
 
 
 
+                     88           88                         
+  ,d                 88           88                         
+  88                 88           88                         
+MM88MMM  ,adPPYYba,  88,dPPYba,   88   ,adPPYba,  ,adPPYba,  
+  88     ""     `Y8  88P'    "8a  88  a8P_____88  I8[    ""  
+  88     ,adPPPPP88  88       d8  88  8PP"""""""   `"Y8ba,   
+  88,    88,    ,88  88b,   ,a8"  88  "8b,   ,aa  aa    ]8I  
+  "Y888  `"8bbdP"Y8  8Y"Ybbd8"'   88   `"Ybbd8"'  `"YbbdP"'
+
+	• DynamoDB Standard 		: tablas predeterminada
+	• DynamoDB Standard-IA 	: tabla de acceso poco frecuente
+
+
+
+
+
+
+
+
+
+
 
          88                                                   88                          88                                              
   ,d     ""                                                   88                          88                ,d                            
@@ -184,13 +221,17 @@ a8"     "8a  88P'    "8a  a8P_____88  88P'   "Y8  ""     `Y8  a8"     ""  88  a8
 	• Cuando se elimina un elemento, como se está escribiendo la tabla, a vacio, esos son WCU que se cobran, porque justamente se está escribiendo en la tabla.
 	• Cada partición en DynamoDB tiene 2 réplicas.
 	• El nodo principal es el único que hace escrituras, pero todos pueden hacer lecturas
+	• "ProjectionExpression": "AlbumTitle, Year, Price" Indica qué atributos se necesitan de una tablas
 
-	• PutItem (create)		: sobre-escribe salvo que use ConditionExpression (sobre la pk completa).
+	• PutItem (create): sobre-escribe salvo que use ConditionExpression (sobre la pk completa).
 	• GetItem 				: siempre requiere el PK completo.
 	• DeleteItem 			: soporta return values.
-	• Query 				: Busca sobre la particion key o un index. La keyConditionExpression es la única manera correcta de filtrar valores en Dynamo. FilterExpression, no.
-	• UpdateItem 			: atomic counters "SET Price = Price - :p".
-	• Scan 					: solo usar en caso de emergencia.
+	• Query 					: Busca sobre la particion key o un index. La keyConditionExpression es la única manera correcta de filtrar valores en Dynamo. FilterExpression, no.
+	• UpdateItem 			: atomic counters "SET Price = Price - :p". Puede funcionar con UPSERT, si no existe inserta el dato, o si existe lo actualiza
+	• Scan 						: solo usar en caso de emergencia.
+
+	• ExecuteStatement recupera uno o varios elementos de una tabla. 
+	• BatchExecuteStatement recupera varios elementos de tablas diferentes en una sola operación. 
 
 
 	• DeleteTable
@@ -314,13 +355,53 @@ a8"     "8a  88P'    "8a  a8P_____88  88P'   "Y8  ""     `Y8  a8"     ""  88  a8
 
 
 
+88                                   88                                             
+88                                   88                                             
+88                                   88                                             
+88,dPPYba,   ,adPPYYba,   ,adPPYba,  88   ,d8  88       88  8b,dPPYba,   ,adPPYba,  
+88P'    "8a  ""     `Y8  a8"     ""  88 ,a8"   88       88  88P'    "8a  I8[    ""  
+88       d8  ,adPPPPP88  8b          8888[     88       88  88       d8   `"Y8ba,   
+88b,   ,a8"  88,    ,88  "8a,   ,aa  88`"Yba,  "8a,   ,a88  88b,   ,a8"  aa    ]8I  
+8Y"Ybbd8"'   `"8bbdP"Y8   `"Ybbd8"'  88   `Y8a  `"YbbdP'Y8  88`YbbdP"'   `"YbbdP"'  
+                                                            88                      
+                                                            88
 
+  https://docs.aws.amazon.com/es_es/amazondynamodb/latest/developerguide/backuprestore_HowItWorksAWS.html
 
+  PITR
+  Amazon DynamoDB point-in-time recovery (PITR)
 
+	Mientras se esté realizando un backup, no puede hacer lo siguiente:
+	Pausar o cancelar la operación de backup.
+	Eliminar la tabla de origen del backup.
+	Deshabilitar los backup de una tabla si uno de ellos está en curso.
 
+	Una tabla se restaura sin tener que consumir el rendimiento aprovisionado de la misma. Puede hacer una restauración completa de la tabla desde la backup de DynamoDB o puede configurar los parámetros de la tabla de destino. Al realizar una restauración, puede cambiar la siguiente configuración de tabla:
+			Índices secundarios globales (GSI)
+			Índices secundarios locales (LSI)
+			Modo de facturación:
+			Capacidad de lectura y escritura aprovisionada
+			Configuración de cifrado
 
+	AWS Backup restaurará las tablas con todos los índices originales.
+				Debe configurar manualmente lo siguiente en la tabla que se restaure:
+				Políticas de escalado automático
+				Políticas de AWS Identity and Access Management (IAM)
+				Alarmas y métricas de Amazon CloudWatch
+				Etiquetas
+				Ajustes de transmisión
+				Configuración del período de vida (TTL)
+				Configuración de la protección contra eliminación
+				Configuración de la recuperación en un momento dado (PITR)
 
+Solo puede restaurar todos los datos de la tabla en una nueva tabla a partir de un backup. 
+Solo puede escribir en la tabla restaurada después de que se active.
 
+Restauración una tabla de DynamoDB a partir de una copia de seguridad
+https://docs.aws.amazon.com/es_es/amazondynamodb/latest/developerguide/Restore.Tutorial.html
+
+Crear Backups (Copias de Seguridad bajo demanda y programadas)
+https://docs.aws.amazon.com/es_es/amazondynamodb/latest/developerguide/CreateBackupAWS.html
 
 
 
@@ -332,3 +413,11 @@ https://www.alexdebrie.com/posts/when-does-cap-theorem-apply/
 https://www.alexdebrie.com/posts/database-consistency/
 https://www.alexdebrie.com/posts/dynamodb-graphql/
 https://www.alexdebrie.com/posts/dynamodb-partitions/
+
+
+
+
+
+
+
+https://docs.aws.amazon.com/es_es/amazondynamodb/latest/developerguide/data-modeling-schemas.html
