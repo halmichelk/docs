@@ -420,4 +420,167 @@ https://www.alexdebrie.com/posts/dynamodb-partitions/
 
 
 
-https://docs.aws.amazon.com/es_es/amazondynamodb/latest/developerguide/data-modeling-schemas.html
+
+
+
+ ad88888ba               88                                                                  
+d8"     "8b              88                                                                  
+Y8,                      88                                                                  
+`Y8aaaaa,     ,adPPYba,  88,dPPYba,    ,adPPYba,  88,dPYba,,adPYba,   ,adPPYYba,  ,adPPYba,  
+  `"""""8b,  a8"     ""  88P'    "8a  a8P_____88  88P'   "88"    "8a  ""     `Y8  I8[    ""  
+        `8b  8b          88       88  8PP"""""""  88      88      88  ,adPPPPP88   `"Y8ba,   
+Y8a     a8P  "8a,   ,aa  88       88  "8b,   ,aa  88      88      88  88,    ,88  aa    ]8I  
+ "Y88888P"    `"Ybbd8"'  88       88   `"Ybbd8"'  88      88      88  `"8bbdP"Y8  `"YbbdP"' 
+
+	• modelado de datos multiples
+		https://docs.aws.amazon.com/es_es/amazondynamodb/latest/developerguide/data-modeling-schemas.html
+
+	• modelado de datos de Workbench
+		https://docs.aws.amazon.com/es_es/amazondynamodb/latest/developerguide/workbench.SampleModels.html
+
+	• ejemplos de código
+		https://docs.aws.amazon.com/es_es/amazondynamodb/latest/developerguide/service_code_examples.html
+
+	• lambda browser
+		https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/javascript/example_code/lambda/lambda-for-browser
+
+
+
+
+
+
+
+
+
+
+            88     ad88                                   88                                           
+            ""    d8"                                     88                                           
+                  88                                      88                                           
+ ,adPPYba,  88  MM88MMM  8b,dPPYba,  ,adPPYYba,   ,adPPYb,88   ,adPPYba,                               
+a8"     ""  88    88     88P'   "Y8  ""     `Y8  a8"    `Y88  a8"     "8a                              
+8b          88    88     88          ,adPPPPP88  8b       88  8b       d8                              
+"8a,   ,aa  88    88     88          88,    ,88  "8a,   ,d88  "8a,   ,a8"                              
+ `"Ybbd8"'  88    88     88          `"8bbdP"Y8   `"8bbdP"Y8   `"YbbdP"'                               
+                                                                                                       
+                                                                                                       
+                                                                                                       
+                                                             88           88                       88  
+                                                             ""           88                       88  
+                                                                          88                       88  
+,adPPYba,   ,adPPYba,   ,adPPYb,d8  88       88  8b,dPPYba,  88   ,adPPYb,88  ,adPPYYba,   ,adPPYb,88  
+I8[    ""  a8P_____88  a8"    `Y88  88       88  88P'   "Y8  88  a8"    `Y88  ""     `Y8  a8"    `Y88  
+ `"Y8ba,   8PP"""""""  8b       88  88       88  88          88  8b       88  ,adPPPPP88  8b       88  
+aa    ]8I  "8b,   ,aa  "8a,   ,d88  "8a,   ,a88  88          88  "8a,   ,d88  88,    ,88  "8a,   ,d88  
+`"YbbdP"'   `"Ybbd8"'   `"YbbdP"Y8   `"YbbdP'Y8  88          88   `"8bbdP"Y8  `"8bbdP"Y8   `"8bbdP"Y8  
+                        aa,    ,88                                                                     
+                         "Y8bbdP"
+
+	• todos los datos de las tablas de dynamodb están cifrados en reposo y no se puede desactivar el cifrado
+	• dynamodb DAX también tiene cifrado adicional
+
+
+
+
+
+
+
+
+
+
+                          88  88                                                           
+                          88  ""                                                           
+                          88                                                               
+8b,dPPYba,    ,adPPYba,   88  88   ,adPPYba,  8b       d8                                  
+88P'    "8a  a8"     "8a  88  88  a8"     ""  `8b     d8'                                  
+88       d8  8b       d8  88  88  8b           `8b   d8'                                   
+88b,   ,a8"  "8a,   ,a8"  88  88  "8a,   ,aa    `8b,d8'                                    
+88`YbbdP"'    `"YbbdP"'   88  88   `"Ybbd8"'      Y88'                                     
+88                                                d8'                                      
+88                                               d8'                                       
+                                                                                           
+                        88                        88                                       
+                        88                 ,d     ""                                       
+                        88                 88                                              
+,adPPYba,   ,adPPYba,   88  88       88  MM88MMM  88   ,adPPYba,   8b,dPPYba,   ,adPPYba,  
+I8[    ""  a8"     "8a  88  88       88    88     88  a8"     "8a  88P'   `"8a  I8[    ""  
+ `"Y8ba,   8b       d8  88  88       88    88     88  8b       d8  88       88   `"Y8ba,   
+aa    ]8I  "8a,   ,a8"  88  "8a,   ,a88    88,    88  "8a,   ,a8"  88       88  aa    ]8I  
+`"YbbdP"'   `"YbbdP"'   88   `"YbbdP'Y8    "Y888  88   `"YbbdP"'   88       88  `"YbbdP"'
+
+https://docs.aws.amazon.com/es_es/amazondynamodb/latest/developerguide/security_iam_troubleshoot.html
+
+
+
+
+
+
+
+
+
+
+  ,ad8888ba,                                      88                                                                  88                                     
+ d8"'    `"8b                                     88                                                           ,d     ""                                     
+d8'                                               88                                                           88                                            
+88              ,adPPYba,    ,adPPYba,    ,adPPYb,88        8b,dPPYba,   8b,dPPYba,  ,adPPYYba,   ,adPPYba,  MM88MMM  88   ,adPPYba,   ,adPPYba,  ,adPPYba,  
+88      88888  a8"     "8a  a8"     "8a  a8"    `Y88        88P'    "8a  88P'   "Y8  ""     `Y8  a8"     ""    88     88  a8"     ""  a8P_____88  I8[    ""  
+Y8,        88  8b       d8  8b       d8  8b       88        88       d8  88          ,adPPPPP88  8b            88     88  8b          8PP"""""""   `"Y8ba,   
+ Y8a.    .a88  "8a,   ,a8"  "8a,   ,a8"  "8a,   ,d88        88b,   ,a8"  88          88,    ,88  "8a,   ,aa    88,    88  "8a,   ,aa  "8b,   ,aa  aa    ]8I  
+  `"Y88888P"    `"YbbdP"'    `"YbbdP"'    `"8bbdP"Y8        88`YbbdP"'   88          `"8bbdP"Y8   `"Ybbd8"'    "Y888  88   `"Ybbd8"'   `"Ybbd8"'  `"YbbdP"'  
+                                                            88                                                                                               
+                                                            88
+
+
+		• https://aws.amazon.com/es/architecture/well-architected/?wa-lens-whitepapers.sort-by=item.additionalFields.sortDate&wa-lens-whitepapers.sort-order=desc&wa-guidance-whitepapers.sort-by=item.additionalFields.sortDate&wa-guidance-whitepapers.sort-order=desc
+
+		• Usar proteccion contra eliminación de la tabla, estando en producción
+		• Cifrado en reposo
+		• Usar roles de IAM para autenticar el acceso a DynamoDB
+		• Uso de condiciones de políticas de IAM para control de acceso preciso
+		• Utilizar un punto de enlace de la VPC y políticas para acceder a DynamoDB
+		• Tenga en cuenta el cifrado del lado del cliente : https://docs.aws.amazon.com/es_es/database-encryption-sdk/latest/devguide/what-is-database-encryption-sdk.html
+
+
+		• Utilice AWS CloudTrail para monitorear el uso de la clave KMS administrada por AWS
+		• Monitorear las operaciones de DynamoDB con CloudTrail
+		• Utilice DynamoDB Streams para monitorear las operaciones del plano de datos
+		• monitorea la configuración de DynamoDB con AWS Config
+		• monitorea el cumplimiento de DynamoDB de las reglas AWS Config
+		• Etiquetar sus recursos de DynamoDB para su identificación y automatización
+		• Monitoree el uso de Amazon DynamoDB en relación con las mejores prácticas de seguridad con AWS Security Hub.
+
+
+
+
+
+
+
+
+
+
+                                              88                                                            
+                                              ""    ,d                                                      
+                                                    88                                                      
+88,dPYba,,adPYba,    ,adPPYba,   8b,dPPYba,   88  MM88MMM  ,adPPYba,   8b,dPPYba,   ,adPPYba,   ,adPPYba,   
+88P'   "88"    "8a  a8"     "8a  88P'   `"8a  88    88    a8"     "8a  88P'   "Y8  a8P_____88  a8"     "8a  
+88      88      88  8b       d8  88       88  88    88    8b       d8  88          8PP"""""""  8b       d8  
+88      88      88  "8a,   ,a8"  88       88  88    88,   "8a,   ,a8"  88          "8b,   ,aa  "8a,   ,a8"  
+88      88      88   `"YbbdP"'   88       88  88    "Y888  `"YbbdP"'   88           `"Ybbd8"'   `"YbbdP"'
+
+		• https://docs.aws.amazon.com/es_es/amazondynamodb/latest/developerguide/monitoring-automated-manual.html
+		• DynamoDB puede integrarse con CloudTrail
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+https://docs.aws.amazon.com/es_es/amazondynamodb/latest/developerguide/CostOptimization_TableLevelCostAnalysis.html
