@@ -1,0 +1,334 @@
+
+
+
+         88                                                                                  88  88           
+         88                                                                                  88  88           
+         88                                                                                  88  88           
+ ,adPPYb,88  8b       d8  8b,dPPYba,   ,adPPYYba,  88,dPYba,,adPYba,    ,adPPYba,    ,adPPYb,88  88,dPPYba,   
+a8"    `Y88  `8b     d8'  88P'   `"8a  ""     `Y8  88P'   "88"    "8a  a8"     "8a  a8"    `Y88  88P'    "8a  
+8b       88   `8b   d8'   88       88  ,adPPPPP88  88      88      88  8b       d8  8b       88  88       d8  
+"8a,   ,d88    `8b,d8'    88       88  88,    ,88  88      88      88  "8a,   ,a8"  "8a,   ,d88  88b,   ,a8"  
+ `"8bbdP"Y8      Y88'     88       88  `"8bbdP"Y8  88      88      88   `"YbbdP"'    `"8bbdP"Y8  8Y"Ybbd8"'   
+                 d8'                                                                                          
+                d8' 
+
+
+De forma predeterminada, cada partición de la tabla se esforzará por ofrecer la capacidad total de 3000 RCU y 1000 WCU.
+El rendimiento total de todas las particiones de la tabla puede estar limitado por el rendimiento aprovisionado en el modo aprovisionado, o por el límite de rendimiento a nivel de tabla en el modo bajo demanda. Para obtener más información, consulte Service Quotas.
+DynamoDB retiene hasta 5 minutos (300 segundos) de capacidad de lectura y escritura sin usar. 
+DynamoDB también puede consumir capacidad de ampliación para el mantenimiento en segundo plano y otras tareas sin previo aviso.
+
+
+Por ejemplo, en una tabla con ubicaciones geográficas, la clave de ordenación podría estructurarse del modo siguiente:
+[country]#[region]#[state]#[county]#[city]#[neighborhood]
+
+
+
+
+88                        88  88                                     
+""                        88  ""                                     
+                          88                                         
+88  8b,dPPYba,    ,adPPYb,88  88   ,adPPYba,   ,adPPYba,  ,adPPYba,  
+88  88P'   `"8a  a8"    `Y88  88  a8"     ""  a8P_____88  I8[    ""  
+88  88       88  8b       88  88  8b          8PP"""""""   `"Y8ba,   
+88  88       88  "8a,   ,d88  88  "8a,   ,aa  "8b,   ,aa  aa    ]8I  
+88  88       88   `"8bbdP"Y8  88   `"Ybbd8"'   `"Ybbd8"'  `"YbbdP"'  
+
+            88                                                  
+            88                                                  
+            88                                                  
+ ,adPPYba,  88  ,adPPYYba,  8b       d8   ,adPPYba,  ,adPPYba,  
+a8"     ""  88  ""     `Y8  `8b     d8'  a8P_____88  I8[    ""  
+8b          88  ,adPPPPP88   `8b   d8'   8PP"""""""   `"Y8ba,   
+"8a,   ,aa  88  88,    ,88    `8b,d8'    "8b,   ,aa  aa    ]8I  
+ `"Ybbd8"'  88  `"8bbdP"Y8      "8"       `"Ybbd8"'  `"YbbdP"'
+
+
+
+
+Cada tabla de DynamoDB puede tener hasta 20 índices secundarios globales (cuota predeterminada) y 5 índices secundarios locales.
+
+
+• Clave de partición: 
+			esta clave primaria simple consta de un único atributo denominado "clave de partición". 
+			Internamente, DynamoDB utiliza el valor clave como entrada para una función hash para determinar el almacenamiento.
+• Clave de partición y clave de clasificación: esta clave, conocida como “clave primaria compuesta”
+
+
+• Índice secundario global (GSI):
+			Un índice secundario global se considera "global" porque las consultas que se realizan en el índice pueden abarcar todos los datos de la tabla base y todas las particiones. Los índices secundarios globales no tienen limitaciones de tamaño y cuentan con su propia configuración de rendimiento aprovisionada para la actividad de lectura y escritura, que es diferente de la configuración de la tabla base.
+
+
+• Índice secundario local (LSI):
+			un índice que tiene la misma clave de partición que la tabla base, pero una clave de clasificación diferente. 
+			LSI, el tamaño total de los elementos indexados de cualquier valor de clave de partición no podrá ser superior a 10 GB. Además
+
+
+No cree índices secundarios en atributos que no consulte con frecuencia. Los índices que se utilizan pocas veces provocan un aumento del almacenamiento y de los costos de E/S y no mejoran el rendimiento de la aplicación.
+si el tamaño de una entrada de índice es de tan solo 200 bytes, DynamoDB la redondeará a 1 KB.
+Evite proyectar atributos si sabe que apenas los va a necesitar en las consultas. 
+Especifique ALL solamente si desea que las consultas devuelvan el elemento de la tabla completo ordenado mediante una clave de ordenación distinta, Al proyectar todos los atributos, ya no será necesario recuperar la tabla, y duplicará los costos de almacenamiento y de actividad de escritura.
+
+
+10 gb, por clave de partición, y eso sumando los índices
+Cada vez que se agrega o actualiza un elemento de una tabla, DynamoDB actualiza todos los índices secundarios locales afectados.
+Si los atributos indexados se han definido en la tabla, los índices secundarios locales también aumentarán.
+
+
+• indice disperso
+				Si la clave de ordenación no aparece en todos los elementos de la tabla, se considera que el índice es disperso.
+
+				Tenga en cuenta que, si una ejecución lambda falla justo después de escribir el nuevo valor agregado, esta ejecución podría volver a intentarse y el valor podría agregarse varias veces, lo que dejaría un valor aproximado.
+
+				el tipo de dato de cada atributo puede ser siempre diferente
+
+				Para leer las actualizaciones prácticamente en tiempo real con una latencia en milisegundos de un solo dígito, utilice el índice secundario global con las condiciones de consulta Month=2018-01, ScanIndexForward=False, Limit=1.
+
+
+
+•	Dynamo siempre responde por debajo de 10 milisegundos
+•	Soporta transacciones y batch
+•	sin esquema
+•	cifrado en reposo
+•	disaster recovery :
+	-por defecto cuando se hace una tabla, dyanmo guarda copias en por lo menos, 3 avalibity zones
+	-global tables, tablas duplicadas en regiones completas
+	-politicas de backup y restore sobre S3, siempre tener el backups en otra cuenta
+	-point-in-time-recovery
+
+
+Características no recomendadas:
+	•	TTL (time to live) - dynamo se puede tardar 24 horas en actualizar todo
+	•	Dynamo Stream (Se debe aprender aws kinesis, a profundidad)
+	•	Standar-IA infrecuen access (Se reduce costo en disco, pero aumenta precio de read and writes)
+	•	PartiQL lenguaje SQL cover
+	•	DAX Dynamo Accelerator es muy caro y se pierden características como ser consistente
+
+
+
+
+
+
+
+
+
+
+ ,adPPYba,  ,adPPYba,   ,adPPYb,d8  88       88   ,adPPYba,  88,dPYba,,adPYba,   ,adPPYYba,  
+a8P_____88  I8[    ""  a8"    `Y88  88       88  a8P_____88  88P'   "88"    "8a  ""     `Y8  
+8PP"""""""   `"Y8ba,   8b       88  88       88  8PP"""""""  88      88      88  ,adPPPPP88  
+"8b,   ,aa  aa    ]8I  "8a    ,d88  "8a,   ,a88  "8b,   ,aa  88      88      88  88,    ,88  
+ `"Ybbd8"'  `"YbbdP"'   `"YbbdP'88   `"YbbdP'Y8   `"Ybbd8"'  88      88      88  `"8bbdP"Y8  
+                                88                                                           
+                                88 
+
+	• table - items - atributos
+	• table - row - clumns
+	• DynamoDB puede poner dificultad para analizar y colocar nuevos patrones de busqueda.
+
+
+
+
+
+
+
+
+
+
+         88                                                   88                          88                                              
+  ,d     ""                                                   88                          88                ,d                            
+  88                                                          88                          88                88                            
+MM88MMM  88  8b,dPPYba,    ,adPPYba,   ,adPPYba,      ,adPPYb,88   ,adPPYba,      ,adPPYb,88  ,adPPYYba,  MM88MMM  ,adPPYba,   ,adPPYba,  
+  88     88  88P'    "8a  a8"     "8a  I8[    ""     a8"    `Y88  a8P_____88     a8"    `Y88  ""     `Y8    88    a8"     "8a  I8[    ""  
+  88     88  88       d8  8b       d8   `"Y8ba,      8b       88  8PP"""""""     8b       88  ,adPPPPP88    88    8b       d8   `"Y8ba,   
+  88,    88  88b,   ,a8"  "8a,   ,a8"  aa    ]8I     "8a,   ,d88  "8b,   ,aa     "8a,   ,d88  88,    ,88    88,   "8a,   ,a8"  aa    ]8I  
+  "Y888  88  88`YbbdP"'    `"YbbdP"'   `"YbbdP"'      `"8bbdP"Y8   `"Ybbd8"'      `"8bbdP"Y8  `"8bbdP"Y8    "Y888  `"YbbdP"'   `"YbbdP"'  
+             88                                                                                                                           
+             88
+
+	Tipos de datos:
+	•	Nativos: number, string, binary
+	•	Document: list (array), Maps (Object) y Sets
+
+	Tipos escalares 		: un tipo escalar es aquel que puede representar exactamente un valor. Los tipos escalares son Number, String, Binary, Boolean y Null.
+	Tipos de documentos 	: un tipo de documento puede representar una estructura compleja con atributos anidados, como los que se encontraría en un documento JSON. Los tipos de documentos son List y Map.
+	Tipos de conjuntos 		: un tipo de conjunto puede representar varios valores escalares. Los tipos de conjuntos son String Set, Number Set y Binary Set.
+
+
+		S		: String
+		N		: Number
+		B		: Binary
+		BOOL	: Boolean
+		NULL	: Null
+		M		: Map
+		L		: List
+		SS		: String Set
+		NS		: Number Set
+		BS		: Binary Set
+
+
+
+
+
+                                                                          88                                                   
+                                                                          ""                                                   
+                                                                                                                               
+ ,adPPYba,   8b,dPPYba,    ,adPPYba,  8b,dPPYba,  ,adPPYYba,   ,adPPYba,  88   ,adPPYba,   8b,dPPYba,    ,adPPYba,  ,adPPYba,  
+a8"     "8a  88P'    "8a  a8P_____88  88P'   "Y8  ""     `Y8  a8"     ""  88  a8"     "8a  88P'   `"8a  a8P_____88  I8[    ""  
+8b       d8  88       d8  8PP"""""""  88          ,adPPPPP88  8b          88  8b       d8  88       88  8PP"""""""   `"Y8ba,   
+"8a,   ,a8"  88b,   ,a8"  "8b,   ,aa  88          88,    ,88  "8a,   ,aa  88  "8a,   ,a8"  88       88  "8b,   ,aa  aa    ]8I  
+ `"YbbdP"'   88`YbbdP"'    `"Ybbd8"'  88          `"8bbdP"Y8   `"Ybbd8"'  88   `"YbbdP"'   88       88   `"Ybbd8"'  `"YbbdP"'  
+             88                                                                                                                
+             88
+
+
+	• Cuando se elimina un elemento, como se está escribiendo la tabla, a vacio, esos son WCU que se cobran, porque justamente se está escribiendo en la tabla.
+	• Cada partición en DynamoDB tiene 2 réplicas.
+	• El nodo principal es el único que hace escrituras, pero todos pueden hacer lecturas
+
+	• PutItem (create)		: sobre-escribe salvo que use ConditionExpression (sobre la pk completa).
+	• GetItem 				: siempre requiere el PK completo.
+	• DeleteItem 			: soporta return values.
+	• Query 				: Busca sobre la particion key o un index. La keyConditionExpression es la única manera correcta de filtrar valores en Dynamo. FilterExpression, no.
+	• UpdateItem 			: atomic counters "SET Price = Price - :p".
+	• Scan 					: solo usar en caso de emergencia.
+
+
+	• DeleteTable
+	• ListTables
+
+
+
+	Rich expressions
+
+	1. Projection expression 		• Query/Get/Scan 				: ProductReviews.FiveStar[0]
+	2. Filter expression 			• Query/Scan: #V >  			:num (#V is a place holder for keyword VIEWS) 
+	3. Conditional expression 		• Put/Update/DeleteItem			: attribute_not_exists (#pr.FiveStar) 
+	4. Update expression 			• UpdateItem 					: set Replies = Replies + :num
+
+
+	DYNAMO API, permite
+
+	• crear tabla
+	• describir tabla
+	• listar tablas
+	• tabla de actualizacion
+	• eliminar tabla
+
+
+
+
+	DYNAMO Streams
+
+	• ListStreams		: devuelve una lista de todas las secuencias o solamente la secuencia de una tabla concreta.
+	• DescribeStream 	: devuelve información sobre una secuencia, como su nombre de recurso de Amazon (ARN) y sobre dónde puede comenzar la aplicación a leer los primeros registros de la secuencia.
+	• GetShardIterator 	: devuelve un iterador de fragmentos, que es una estructura de datos que la aplicación utiliza para recuperar los registros de la secuencia.
+	• GetRecords 		: recupera uno o varios registros de secuencia mediante el iterador de fragmentos especificado.
+
+
+
+
+
+
+
+                                                 88                          
+                                                 ""                          
+                                                                             
+8b,dPPYba,   8b,dPPYba,   ,adPPYba,   ,adPPYba,  88   ,adPPYba,   ,adPPYba,  
+88P'    "8a  88P'   "Y8  a8P_____88  a8"     ""  88  a8"     "8a  I8[    ""  
+88       d8  88          8PP"""""""  8b          88  8b       d8   `"Y8ba,   
+88b,   ,a8"  88          "8b,   ,aa  "8a,   ,aa  88  "8a,   ,a8"  aa    ]8I  
+88`YbbdP"'   88           `"Ybbd8"'   `"Ybbd8"'  88   `"YbbdP"'   `"YbbdP"'  
+88                                                                           
+88
+
+	• 0.25 dolares por GB mensual por almacenamiento
+	• si utiliza los precios On-Demand de DynamoDB , no ahorrará dinero al optar por un diseño de tabla única.
+
+
+
+
+
+
+
+
+
+
+
+88  88                      88                                 
+88  ""                      ""    ,d                           
+88                                88                           
+88  88  88,dPYba,,adPYba,   88  MM88MMM  ,adPPYba,  ,adPPYba,  
+88  88  88P'   "88"    "8a  88    88    a8P_____88  I8[    ""  
+88  88  88      88      88  88    88    8PP"""""""   `"Y8ba,   
+88  88  88      88      88  88    88,   "8b,   ,aa  aa    ]8I  
+88  88  88      88      88  88    "Y888  `"Ybbd8"'  `"YbbdP"'
+
+	• 400kb por item & 32 levels de inmersion
+	• PK 3000 RCU / 1000 WCU
+	• max 5 indices locales, y 10 gigas de tamaño
+	• max 20 indices Globales (pero se pueden incrementar por ticket)
+	• Dynamo solo puede escalar al doble cada hora
+	• BATCH tiene un limite de 16 megas o 25 items
+	• proyection expresion, permite ser selectivo con los atributos q se recuperan
+	• maximo 256 tablas por cuenta
+	• el nombre de la pk o la sk, puede ser maxsimo de 2048 bytes
+	• max 20 atrivutos en un indice secundario
+	
+	1. los atributos anidados solo pueden llegar a 32 niveles de profundidad
+	2. el tamaño máximo de los resultados de una consulta es de 1mb, si es más, dynamodb devuelve LastEvaluatedKey, que se puede usar para leer la página siguiente.
+	3. cada particion de Dynamodb tiene 10 gb de datos
+
+	• a operación BatchGetItem puede devolver hasta 16 MB de datos.
+
+	• Puede utilizar hasta 3000 unidades de capacidad de lectura (RCU) y hasta 1000 unidades de capacidad de escritura (WCU) en una única partición por segundo. Esto le permitiría leer 12 MB de datos muy consistentes o 24 MB de datos eventualmente consistentes por segundo , así como escribir 1 MB de datos por segundo. Y recuerde: ¡esto es por partición!
+
+	• Nombres de tablas e índices secundarios: los nombres deben tener una longitud mínima de 3 caracteres y un máximo de 255. Utilizan los siguientes caracteres: AZ, az, 0-9, “_”, “-” y “. ”.
+	• Nombres de atributos: un carácter sigue siendo el mínimo y 64 KB el máximo.
+
+
+	• Longitud de expresión: las cadenas de expresión tienen un límite de 4 KB. 
+	• Las expresiones de atributos tienen un límite de 255 bytes. 
+	• Las variables de sustitución de una expresión tienen un límite de 2 MB
+
+
+
+
+	Reglas de nomenclatura
+
+		• Todos los nombres se deben codificar mediante UTF-8 y distinguen entre mayúsculas y minúsculas.
+		• Los nombres de las tablas y los índices deben tener entre 3 y 255 caracteres, que solo pueden ser los siguientes:
+			a-z
+			A-Z
+			0-9
+		• _ (guion bajo)
+		• - (guion)
+		• . (punto)
+		• Los nombres de atributo deben tener al menos un carácter y un tamaño inferior a 64 KB.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+https://docs.aws.amazon.com/es_es/amazondynamodb/latest/developerguide/ServiceQuotas.html
+https://www.alexdebrie.com/posts/dynamodb-eventual-consistency
+https://www.alexdebrie.com/posts/dynamodb-no-bad-queries/
+https://www.alexdebrie.com/posts/dynamodb-paper/
+https://www.alexdebrie.com/posts/when-does-cap-theorem-apply/
+https://www.alexdebrie.com/posts/database-consistency/
+https://www.alexdebrie.com/posts/dynamodb-graphql/
+https://www.alexdebrie.com/posts/dynamodb-partitions/
