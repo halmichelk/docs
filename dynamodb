@@ -304,6 +304,9 @@ a8"     "8a  88P'    "8a  a8P_____88  88P'   "Y8  ""     `Y8  a8"     ""  88  a8
 88  88  88      88      88  88    88,   "8b,   ,aa  aa    ]8I  
 88  88  88      88      88  88    "Y888  `"Ybbd8"'  `"YbbdP"'
 
+
+	De forma predeterminada, cada partición de la tabla se esforzará por ofrecer la capacidad total de 3000 RCU y 1000 WCU. 
+
 	• 400kb por item & 32 levels de inmersion
 	• PK 3000 RCU / 1000 WCU
 	• max 5 indices locales, y 10 gigas de tamaño
@@ -431,6 +434,9 @@ Y8,                      88
         `8b  8b          88       88  8PP"""""""  88      88      88  ,adPPPPP88   `"Y8ba,   
 Y8a     a8P  "8a,   ,aa  88       88  "8b,   ,aa  88      88      88  88,    ,88  aa    ]8I  
  "Y88888P"    `"Ybbd8"'  88       88   `"Ybbd8"'  88      88      88  `"8bbdP"Y8  `"YbbdP"' 
+
+
+	• si quiero siempre ver el último elemento, lo que hago es jugar con un prefijo o sufijo de versión a _0 y ese siempre será el último
 
 	• modelado de datos multiples
 		https://docs.aws.amazon.com/es_es/amazondynamodb/latest/developerguide/data-modeling-schemas.html
@@ -578,9 +584,23 @@ Y8,        88  8b       d8  8b       d8  8b       88        88       d8  88     
 
 
 
+                                      ,d                            
+                                      88                            
+ ,adPPYba,   ,adPPYba,   ,adPPYba,  MM88MMM  ,adPPYba,   ,adPPYba,  
+a8"     ""  a8"     "8a  I8[    ""    88    a8"     "8a  I8[    ""  
+8b          8b       d8   `"Y8ba,     88    8b       d8   `"Y8ba,   
+"8a,   ,aa  "8a,   ,a8"  aa    ]8I    88,   "8a,   ,a8"  aa    ]8I  
+ `"Ybbd8"'   `"YbbdP"'   `"YbbdP"'    "Y888  `"YbbdP"'   `"YbbdP"'
+
+ 	Tanto la AWS Management Console de Amazon DynamoDB como la API DescribeTable le mostrarán información sobre una sola tabla.
+ 	En modo de capacidad bajo demanda, DescribeTable no sirve.
+ 	optimización de costos: https://docs.aws.amazon.com/es_es/amazondynamodb/latest/developerguide/bp-cost-optimization.html
 
 
 
 
 
-https://docs.aws.amazon.com/es_es/amazondynamodb/latest/developerguide/CostOptimization_TableLevelCostAnalysis.html
+https://www.youtube.com/watch?v=fYW-TQ9A2Lo
+https://docs.aws.amazon.com/es_es/amazondynamodb/latest/developerguide/bp-gsi-aggregation.html
+
+
