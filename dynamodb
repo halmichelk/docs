@@ -450,6 +450,9 @@ Y8a     a8P  "8a,   ,aa  88       88  "8b,   ,aa  88      88      88  88,    ,88
 	• lambda browser
 		https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/javascript/example_code/lambda/lambda-for-browser
 
+	• relacion muchos a muchos
+		https://docs.aws.amazon.com/es_es/amazondynamodb/latest/developerguide/bp-adjacency-graphs.html
+
 
 
 
@@ -601,6 +604,5 @@ a8"     ""  a8"     "8a  I8[    ""    88    a8"     "8a  I8[    ""
 
 
 https://www.youtube.com/watch?v=fYW-TQ9A2Lo
-https://docs.aws.amazon.com/es_es/amazondynamodb/latest/developerguide/bp-gsi-aggregation.html
-
+https://docs.aws.amazon.com/es_es/amazondynamodb/latest/developerguide/bp-modeling-nosql.html
 
