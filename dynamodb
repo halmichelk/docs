@@ -12,11 +12,7 @@ a8"    `Y88  `8b     d8'  88P'   `"8a  ""     `Y8  88P'   "88"    "8a  a8"     "
                  d8'                                                                                          
                 d8' 
 
-Presentaciones de modelado de datos y patrones de diseño
-https://docs.aws.amazon.com/es_es/amazondynamodb/latest/developerguide/AdditionalResources.DataModeling.html
 
-Escritura de un elemento NODEJS
-https://docs.aws.amazon.com/es_es/amazondynamodb/latest/developerguide/GettingStarted.WriteItem.html
 
 
 herramientas dynamodb :
@@ -166,18 +162,18 @@ MM88MMM  88  8b,dPPYba,    ,adPPYba,   ,adPPYba,      ,adPPYb,88   ,adPPYba,    
 	•	Nativos: number, string, binary
 	•	Document: list (array), Maps (Object) y Sets
 
-	Tipos escalares 		: un tipo escalar es aquel que puede representar exactamente un valor. Los tipos escalares son Number, String, Binary, Boolean y Null.
+	Tipos escalares 			: un tipo escalar es aquel que puede representar exactamente un valor. Los tipos escalares son Number, String, Binary, Boolean y Null.
 	Tipos de documentos 	: un tipo de documento puede representar una estructura compleja con atributos anidados, como los que se encontraría en un documento JSON. Los tipos de documentos son List y Map.
 	Tipos de conjuntos 		: un tipo de conjunto puede representar varios valores escalares. Los tipos de conjuntos son String Set, Number Set y Binary Set.
 
 
-		S		: String
-		N		: Number
-		B		: Binary
+		S			: String
+		N			: Number
+		B			: Binary
 		BOOL	: Boolean
 		NULL	: Null
-		M		: Map
-		L		: List
+		M			: Map
+		L			: List
 		SS		: String Set
 		NS		: Number Set
 		BS		: Binary Set
@@ -219,7 +215,11 @@ a8"     "8a  88P'    "8a  a8P_____88  88P'   "Y8  ""     `Y8  a8"     ""  88  a8
              88
 
 
-	• https://docs.aws.amazon.com/es_es/amazondynamodb/latest/APIReference/API_Operations_Amazon_DynamoDB.html
+	• Escritura de un elemento NODEJS !important
+		https://docs.aws.amazon.com/es_es/amazondynamodb/latest/developerguide/GettingStarted.WriteItem.html
+	• https://docs.aws.amazon.com/es_es/amazondynamodb/latest/APIReference/API_Operations_Amazon_DynamoDB.html  !important: Aquí estan los ejemplos de toda la api
+
+
 
 	• Cuando se elimina un elemento, como se está escribiendo la tabla, a vacio, esos son WCU que se cobran, porque justamente se está escribiendo en la tabla.
 	• Cada partición en DynamoDB tiene 2 réplicas.
@@ -242,7 +242,7 @@ a8"     "8a  88P'    "8a  a8P_____88  88P'   "Y8  ""     `Y8  a8"     ""  88  a8
 
 
 	• Parámetros condicionales heredados (importante revisarlos)
-		https://docs.aws.amazon.com/es_es/amazondynamodb/latest/developerguide/LegacyConditionalParameters.html
+		https://docs.aws.amazon.com/es_es/amazondynamodb/latest/developerguide/LegacyConditionalParameters.html !important
 
 		Si usa esta API... 	> Con éstos parámetros en desuso 	> Use éstos parámetros actuales
 		BatchGetItem				> AttributesToGet									> ProjectionExpression
@@ -269,19 +269,19 @@ a8"     "8a  88P'    "8a  a8P_____88  88P'   "Y8  ""     `Y8  a8"     ""  88  a8
 
 	Rich expressions
 
-	1. Projection expression 		• Query/Get/Scan 				: ProductReviews.FiveStar[0]
-	2. Filter expression 			• Query/Scan: #V >  			:num (#V is a place holder for keyword VIEWS) 
-	3. Conditional expression 		• Put/Update/DeleteItem			: attribute_not_exists (#pr.FiveStar) 
-	4. Update expression 			• UpdateItem 					: set Replies = Replies + :num
+	1. Projection expression 	• Query/Get/Scan 				: ProductReviews.FiveStar[0]
+	2. Filter expression 			• Query/Scan: #V >  		: num (#V is a place holder for keyword VIEWS) 
+	3. Conditional expression • Put/Update/DeleteItem	: attribute_not_exists (#pr.FiveStar) 
+	4. Update expression 			• UpdateItem 						: set Replies = Replies + :num
 
 
-	DYNAMO API, permite
+	DYNAMO API, permite :
 
-	• crear tabla
-	• describir tabla
-	• listar tablas
-	• tabla de actualizacion
-	• eliminar tabla
+					• crear tabla
+					• describir tabla
+					• listar tablas
+					• tabla de actualizacion
+					• eliminar tabla
 
 
 
@@ -334,7 +334,7 @@ a8"     "8a  88P'    "8a  a8P_____88  88P'   "Y8  ""     `Y8  a8"     ""  88  a8
 
 
 
-	• https://docs.aws.amazon.com/es_es/amazondynamodb/latest/developerguide/ServiceQuotas.html
+	• https://docs.aws.amazon.com/es_es/amazondynamodb/latest/developerguide/ServiceQuotas.html !important
 
 	• De forma predeterminada, cada partición de la tabla se esforzará por ofrecer la capacidad total de 3000 RCU y 1000 WCU. 
 
@@ -369,7 +369,7 @@ a8"     "8a  88P'    "8a  a8P_____88  88P'   "Y8  ""     `Y8  a8"     ""  88  a8
 
 
 
-	Reglas de nomenclatura
+	Reglas de nomenclatura :
 
 		• Todos los nombres se deben codificar mediante UTF-8 y distinguen entre mayúsculas y minúsculas.
 		• Los nombres de las tablas y los índices deben tener entre 3 y 255 caracteres, que solo pueden ser los siguientes:
@@ -411,7 +411,7 @@ a8"     "8a  88P'    "8a  a8P_____88  88P'   "Y8  ""     `Y8  a8"     ""  88  a8
                                                             88                      
                                                             88
 
-  https://docs.aws.amazon.com/es_es/amazondynamodb/latest/developerguide/backuprestore_HowItWorksAWS.html
+  https://docs.aws.amazon.com/es_es/amazondynamodb/latest/developerguide/backuprestore_HowItWorksAWS.html !important
 
   PITR
   Amazon DynamoDB point-in-time recovery (PITR)
@@ -443,10 +443,10 @@ Solo puede restaurar todos los datos de la tabla en una nueva tabla a partir de 
 Solo puede escribir en la tabla restaurada después de que se active.
 
 Restauración una tabla de DynamoDB a partir de una copia de seguridad
-https://docs.aws.amazon.com/es_es/amazondynamodb/latest/developerguide/Restore.Tutorial.html
+https://docs.aws.amazon.com/es_es/amazondynamodb/latest/developerguide/Restore.Tutorial.html !important
 
 Crear Backups (Copias de Seguridad bajo demanda y programadas)
-https://docs.aws.amazon.com/es_es/amazondynamodb/latest/developerguide/CreateBackupAWS.html
+https://docs.aws.amazon.com/es_es/amazondynamodb/latest/developerguide/CreateBackupAWS.html !important
 
 
 
@@ -478,11 +478,28 @@ Y8a     a8P  "8a,   ,aa  88       88  "8b,   ,aa  88      88      88  88,    ,88
  "Y88888P"    `"Ybbd8"'  88       88   `"Ybbd8"'  88      88      88  `"8bbdP"Y8  `"YbbdP"' 
 
 
+	• Presentaciones de modelado de datos y patrones de diseño: YOUTUBE
+		https://docs.aws.amazon.com/es_es/amazondynamodb/latest/developerguide/AdditionalResources.DataModeling.html !important
+
+					https://www.youtube.com/watch?v=DIQVJqiSUkE AWS re:Invent 2019: Data modeling with Amazon DynamoDB (CMY304) !important
+					https://www.youtube.com/watch?v=fiP2e-g-r4g AWS re:Invent 2020: Data modeling with Amazon DynamoDB – Part 1 !important
+					https://www.youtube.com/watch?v=0uLF1tjI_BI AWS re:Invent 2020: Data modeling with Amazon DynamoDB – Part 2 !important
+					https://www.youtube.com/watch?v=jzeKPKpucS0 AWS re:Invent 2017: [REPEAT] Advanced Design Patterns for Amazon DynamoDB (DAT403-R) !important
+					https://www.youtube.com/watch?v=HaEPXoXVf2k AWS re:Invent 2018: Amazon DynamoDB Deep Dive: Advanced Design Patterns for DynamoDB (DAT401) !important
+					https://www.youtube.com/watch?v=6yqfmXiZTlM AWS re:Invent 2019: [REPEAT 1] Amazon DynamoDB deep dive: Advanced design patterns (DAT403-R1) !important
+																													https://www.jeremydaly.com/takeaways-from-dynamodb-deep-dive-advanced-design-patterns-dat403/ !important
+
+					https://www.youtube.com/watch?v=MF9a1UNOAQo 					AWS re:Invent 2020: Amazon DynamoDB advanced design patterns – Part 1 !important
+					https://www.youtube.com/watch?v=_KNrRdWD25M&index=2 	AWS re:Invent 2020: Amazon DynamoDB advanced design patterns – Part 2 !important
+
+
+
+
 	• table - items - atributos
 	• table - row - clumns
 	• DynamoDB puede poner dificultad para analizar y colocar nuevos patrones de busqueda.
 
-	• TABLAS GLOBALES : https://docs.aws.amazon.com/es_es/amazondynamodb/latest/developerguide/bp-global-table-design.html
+	• TABLAS GLOBALES : https://docs.aws.amazon.com/es_es/amazondynamodb/latest/developerguide/bp-global-table-design.html !important
 		Modo de escritura en cualquier región (no principal)
 		Modo de escritura en una región (principal único)
 		Modo de escritura en su región (principal mixto)
@@ -493,28 +510,28 @@ Y8a     a8P  "8a,   ,aa  88       88  "8b,   ,aa  88      88      88  88,    ,88
 	• si quiero siempre ver el último elemento, lo que hago es jugar con un prefijo o sufijo de versión a _0 y ese siempre será el último
 
 	• modelado de datos multiples
-		https://docs.aws.amazon.com/es_es/amazondynamodb/latest/developerguide/data-modeling-schemas.html
+		https://docs.aws.amazon.com/es_es/amazondynamodb/latest/developerguide/data-modeling-schemas.html !important
 
 	• modelado de datos de Workbench
-		https://docs.aws.amazon.com/es_es/amazondynamodb/latest/developerguide/workbench.SampleModels.html
+		https://docs.aws.amazon.com/es_es/amazondynamodb/latest/developerguide/workbench.SampleModels.html !important
 
 	• ejemplos de código
-		https://docs.aws.amazon.com/es_es/amazondynamodb/latest/developerguide/service_code_examples.html
+		https://docs.aws.amazon.com/es_es/amazondynamodb/latest/developerguide/service_code_examples.html !important
 
 	• lambda browser
-		https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/javascript/example_code/lambda/lambda-for-browser
+		https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/javascript/example_code/lambda/lambda-for-browser !important
 
 	• relacion muchos a muchos
-		https://docs.aws.amazon.com/es_es/amazondynamodb/latest/developerguide/bp-adjacency-graphs.html
+		https://docs.aws.amazon.com/es_es/amazondynamodb/latest/developerguide/bp-adjacency-graphs.html !important
 
 		De SQL a Dynamodb
-	• https://docs.aws.amazon.com/es_es/amazondynamodb/latest/developerguide/bp-modeling-nosql-B.html
+	• https://docs.aws.amazon.com/es_es/amazondynamodb/latest/developerguide/bp-modeling-nosql-B.html !important
 
 		Consulta y análisis
-	• https://docs.aws.amazon.com/es_es/amazondynamodb/latest/developerguide/bp-query-scan.html
+	• https://docs.aws.amazon.com/es_es/amazondynamodb/latest/developerguide/bp-query-scan.html !important
 
 		mas ejemplos
-	• https://docs.aws.amazon.com/es_es/amazondynamodb/latest/developerguide/AppendixSampleTables.html
+	• https://docs.aws.amazon.com/es_es/amazondynamodb/latest/developerguide/AppendixSampleTables.html !important
 
 
 
@@ -579,7 +596,7 @@ I8[    ""  a8"     "8a  88  88       88    88     88  a8"     "8a  88P'   `"8a  
 aa    ]8I  "8a,   ,a8"  88  "8a,   ,a88    88,    88  "8a,   ,a8"  88       88  aa    ]8I  
 `"YbbdP"'   `"YbbdP"'   88   `"YbbdP'Y8    "Y888  88   `"YbbdP"'   88       88  `"YbbdP"'
 
-https://docs.aws.amazon.com/es_es/amazondynamodb/latest/developerguide/security_iam_troubleshoot.html
+https://docs.aws.amazon.com/es_es/amazondynamodb/latest/developerguide/security_iam_troubleshoot.html !important
 
 
 
@@ -602,14 +619,15 @@ Y8,        88  8b       d8  8b       d8  8b       88        88       d8  88     
                                                             88
 
 
-		• https://aws.amazon.com/es/architecture/well-architected/?wa-lens-whitepapers.sort-by=item.additionalFields.sortDate&wa-lens-whitepapers.sort-order=desc&wa-guidance-whitepapers.sort-by=item.additionalFields.sortDate&wa-guidance-whitepapers.sort-order=desc
+		• Well-Architected !important
+			https://aws.amazon.com/es/architecture/well-architected/?wa-lens-whitepapers.sort-by=item.additionalFields.sortDate&wa-lens-whitepapers.sort-order=desc&wa-guidance-whitepapers.sort-by=item.additionalFields.sortDate&wa-guidance-whitepapers.sort-order=desc
 
 		• Usar proteccion contra eliminación de la tabla, estando en producción
 		• Cifrado en reposo
 		• Usar roles de IAM para autenticar el acceso a DynamoDB
 		• Uso de condiciones de políticas de IAM para control de acceso preciso
 		• Utilizar un punto de enlace de la VPC y políticas para acceder a DynamoDB
-		• Tenga en cuenta el cifrado del lado del cliente : https://docs.aws.amazon.com/es_es/database-encryption-sdk/latest/devguide/what-is-database-encryption-sdk.html
+		• Tenga en cuenta el cifrado del lado del cliente : https://docs.aws.amazon.com/es_es/database-encryption-sdk/latest/devguide/what-is-database-encryption-sdk.html !important
 
 
 		• Utilice AWS CloudTrail para monitorear el uso de la clave KMS administrada por AWS
@@ -619,7 +637,7 @@ Y8,        88  8b       d8  8b       d8  8b       88        88       d8  88     
 		• monitorea el cumplimiento de DynamoDB de las reglas AWS Config
 		• Etiquetar sus recursos de DynamoDB para su identificación y automatización
 		• Monitoree el uso de Amazon DynamoDB en relación con las mejores prácticas de seguridad con AWS Security Hub.
-		• Reutilizar conexiones: GetItem “keep-alive", baja la latncia : https://docs.aws.amazon.com/es_es/amazondynamodb/latest/developerguide/TroubleshootingLatency.html
+		• Reutilizar conexiones: GetItem “keep-alive", baja la latencia : https://docs.aws.amazon.com/es_es/amazondynamodb/latest/developerguide/TroubleshootingLatency.html !important
 
 
 
@@ -639,7 +657,7 @@ Y8,        88  8b       d8  8b       d8  8b       88        88       d8  88     
 88      88      88  "8a,   ,a8"  88       88  88    88,   "8a,   ,a8"  88          "8b,   ,aa  "8a,   ,a8"  
 88      88      88   `"YbbdP"'   88       88  88    "Y888  `"YbbdP"'   88           `"Ybbd8"'   `"YbbdP"'
 
-		• https://docs.aws.amazon.com/es_es/amazondynamodb/latest/developerguide/monitoring-automated-manual.html
+		• https://docs.aws.amazon.com/es_es/amazondynamodb/latest/developerguide/monitoring-automated-manual.html !important
 		• DynamoDB puede integrarse con CloudTrail
 		• Si su carga de trabajo parece experimentar una latencia elevada, puede analizar SuccessfulRequestLatency de CloudWatch, solo mide dynamodb no el cliente, etc etc
 
@@ -662,7 +680,7 @@ a8"     ""  a8"     "8a  I8[    ""    88    a8"     "8a  I8[    ""
 
  	Tanto la AWS Management Console de Amazon DynamoDB como la API DescribeTable le mostrarán información sobre una sola tabla.
  	En modo de capacidad bajo demanda, DescribeTable no sirve.
- 	optimización de costos: https://docs.aws.amazon.com/es_es/amazondynamodb/latest/developerguide/bp-cost-optimization.html
+ 	optimización de costos: https://docs.aws.amazon.com/es_es/amazondynamodb/latest/developerguide/bp-cost-optimization.html !important
 
 
 
@@ -693,8 +711,8 @@ a8"     ""  a8"     "8a  I8[    ""    88    a8"     "8a  I8[    ""
 	• limites:
 					50 importaciones simultanes
 					desde max 1 o max 15 TB a la vez, dependiendo de la region
-					hasta 5000 objetos de Amazon S3 en todas las regiones
-					https://docs.aws.amazon.com/es_es/amazondynamodb/latest/developerguide/S3DataImport.Validation.html
+					hasta 5000 objetos de Amazon S3 en todas las regiones 
+					https://docs.aws.amazon.com/es_es/amazondynamodb/latest/developerguide/S3DataImport.Validation.html !important
 
 	• Puede exportar los datos de la tabla a cualquier bucket de Amazon S3 en el que tenga permiso para escribir. 
 		El bucket de destino no tiene por qué estar en la misma región o tener el mismo propietario que la tabla fuente.
@@ -712,10 +730,20 @@ a8"     ""  a8"     "8a  I8[    ""    88    a8"     "8a  I8[    ""
 
 
 
-https://www.youtube.com/watch?v=fYW-TQ9A2Lo
+https://www.youtube.com/watch?v=fYW-TQ9A2Lo !important
+
+
+
+
+
+
+
+
+
+
+
 
 Pregunta: punto ciego en la distribución de las PK.
-
 
 
 
