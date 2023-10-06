@@ -335,6 +335,11 @@ a8"     "8a  88P'    "8a  a8P_____88  88P'   "Y8  ""     `Y8  a8"     ""  88  a8
 
 
 	• https://docs.aws.amazon.com/es_es/amazondynamodb/latest/developerguide/ServiceQuotas.html !important
+		• por cada 24 horas, se puede cambiar 2 veces las RCU y las WCU.
+		• una RCU*s equivale en consistencia alta a 4kb y consistencia eventual a 2kb de datos.
+		• una WCU*s equivale a 1kb.
+		• las lecturas transacionales cuestan 2RCU*s
+		• las escrituras transacionales cuestan 2WCU*s
 
 	• De forma predeterminada, cada partición de la tabla se esforzará por ofrecer la capacidad total de 3000 RCU y 1000 WCU. 
 
@@ -744,7 +749,6 @@ https://www.youtube.com/watch?v=fYW-TQ9A2Lo !important
 
 
 Pregunta: punto ciego en la distribución de las PK.
-
 
 
 
