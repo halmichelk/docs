@@ -34,6 +34,68 @@ Por ejemplo, en una tabla con ubicaciones geográficas, la clave de ordenación 
 
 
 
+
+	Se puede buscar por:
+											PK
+											SK
+											PK + SK
+
+											... y se puede filtrar por SK :
+																										igual que
+																										menor o igual que
+																										menor que
+																										mayor o igual que
+																										mayor que
+																										entre
+																										comienza por
+
+											... y se puede filtrar por atributo :
+																													... primero se especifica el nombre del atributo 
+																															y el tipo y de acuerdo al tipo
+
+																													cadena:
+																												o	binario:
+																																igual que
+																																no es igual que
+																																menor o igual que
+																																menor que
+																																mayor o igual que
+																																mayor que
+																																entre
+																																existe
+																																no existe
+																																contiene
+																																no contiene
+																																comienza por
+																													número:
+																																igual que
+																																no es igual que
+																																menor o igual que
+																																menor que
+																																mayor o igual que
+																																mayor que
+																																entre
+																																existe
+																																no existe
+																													binario:
+																																igual que
+																																no es igual que
+																																existe
+																																no existe
+																														nulo:
+																																existe
+																																no existe
+																																(para el caso de nulo, no es necesario especificar el valor)			
+
+
+
+
+
+
+
+
+
+
 88                        88  88                                     
 ""                        88  ""                                     
                           88                                         
@@ -65,7 +127,8 @@ Cada tabla de DynamoDB puede tener hasta 20 índices secundarios globales (cuota
 
 
 • Índice secundario global (GSI):
-			Un índice secundario global se considera "global" porque las consultas que se realizan en el índice pueden abarcar todos los datos de la tabla base y todas las particiones. Los índices secundarios globales no tienen limitaciones de tamaño y cuentan con su propia configuración de rendimiento aprovisionada para la actividad de lectura y escritura, que es diferente de la configuración de la tabla base.
+			Un índice secundario global se considera "global" porque las consultas que se realizan en el índice pueden abarcar todos los datos de la tabla base y todas las particiones. 
+			Los índices secundarios globales no tienen limitaciones de tamaño y cuentan con su propia configuración de rendimiento aprovisionada para la actividad de lectura y escritura, que es diferente de la configuración de la tabla base.
 
 
 • Índice secundario local (LSI):
@@ -89,11 +152,8 @@ Si los atributos indexados se han definido en la tabla, los índices secundarios
 
 • indice disperso
 				Si la clave de ordenación no aparece en todos los elementos de la tabla, se considera que el índice es disperso.
-
 				Tenga en cuenta que, si una ejecución lambda falla justo después de escribir el nuevo valor agregado, esta ejecución podría volver a intentarse y el valor podría agregarse varias veces, lo que dejaría un valor aproximado.
-
 				el tipo de dato de cada atributo puede ser siempre diferente
-
 				Para leer las actualizaciones prácticamente en tiempo real con una latencia en milisegundos de un solo dígito, utilice el índice secundario global con las condiciones de consulta Month=2018-01, ScanIndexForward=False, Limit=1.
 
 
@@ -740,15 +800,6 @@ https://www.youtube.com/watch?v=fYW-TQ9A2Lo !important
 
 
 
-
-
-
-
-
-
-
-
-Pregunta: punto ciego en la distribución de las PK.
 
 
 
